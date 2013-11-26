@@ -19,11 +19,11 @@ SquareMatrixQ[expr_] :=
   MatrixQ[expr] && Length[Union[Dimensions[expr]]] == 1;
 
 
-J[eqs_: ListQ, vars_: ListQ] := 
+J[eqs_?ListQ, vars_?ListQ] := 
   Outer[D, eqs, vars] /; Length[eqs] == Length[vars];
 
 
-SpectralBound[mat_: SquareMatrixQ] := 
+SpectralBound[mat_?SquareMatrixQ] := 
   Max[Re[Eigenvalues[mat]]];
 
 
