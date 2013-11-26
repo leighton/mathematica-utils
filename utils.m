@@ -9,6 +9,9 @@ dimensions are of the same order, and gives false otherwise";
 
 J::usage = "Compute the Jacobian of a system n equations by n variables";
 
+SpectralBound::usage = "Compute the spectral bound (i.e. maximum real part of
+all eigenvalues)";
+
 Begin["`Private`"]
 
 
@@ -17,7 +20,11 @@ SquareMatrixQ[expr_] :=
 
 
 J[eqs_: ListQ, vars_: ListQ] := 
- Outer[D, eqs, vars] /; Length[eqs] == Length[vars];
+  Outer[D, eqs, vars] /; Length[eqs] == Length[vars];
+
+
+SpectralBound[mat_: SquareMatrixQ] := 
+  Max[Re[Eigenvalues[mat]]];
 
 
 End[ ]
