@@ -14,4 +14,5 @@ Functions
 Expression tests
 ----------------
  * SquareMatrixQ
+ * NonSingularMatrixQ
 

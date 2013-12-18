@@ -7,6 +7,10 @@ SquareMatrixQ::usage = "gives True if expr is a list of lists or a
 two-dimensional SparseArray object that can represent a matrix whose two
 dimensions are of the same order, and gives false otherwise";
 
+NonSingularMatrixQ::usage = "gives True is the expr is a list of lists or a
+two-dimensional SparseArray object that can represent a matrix whose determinant
+is non-zero";
+
 J::usage = "Compute the Jacobian of a system n equations by n variables";
 
 SpectralBound::usage = "Compute the spectral bound of a square matrix (i.e. 
@@ -20,6 +24,10 @@ Begin["`Private`"]
 
 SquareMatrixQ[expr_] := 
   MatrixQ[expr] && Length[Union[Dimensions[expr]]] == 1;
+
+
+NonSingularMatrixQ[expr_] := 
+  MatrixQ[expr] && Det[expr] != 0;
 
 
 J[eqs_?ListQ, vars_?ListQ] := 
