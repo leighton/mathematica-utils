@@ -7,6 +7,9 @@ SquareMatrixQ::usage = "gives True if expr is a list of lists or a
 two-dimensional SparseArray object that can represent a matrix whose two
 dimensions are of the same order, and gives false otherwise";
 
+MarkovMatrixQ::usage = "gives True if expr is a square matrix and the sum
+of each row equals 1, and gives false otherwise";
+
 J::usage = "Compute the Jacobian of a system n equations by n variables";
 
 SpectralBound::usage = "Compute the spectral bound of a square matrix (i.e. 
@@ -20,6 +23,10 @@ Begin["`Private`"]
 
 SquareMatrixQ[expr_] := 
   MatrixQ[expr] && Length[Union[Dimensions[expr]]] == 1;
+
+
+MarkovMatrixQ[expr_] :=
+  SquareMatrixQ[expr] && MatchQ[Total /@ expr, {(1 | 1.) ..}];
 
 
 J[eqs_?ListQ, vars_?ListQ] := 
